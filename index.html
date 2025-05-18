@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Novel Search</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: sans-serif; margin: 1rem; }
+    input, button { font-size: 1rem; margin: 0.2rem; }
+    .result { margin: 0.5rem 0; padding: 0.5rem; border-bottom: 1px solid #ddd; }
+    .chap { font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>🔎 Novel Search</h1>
+  <form method="post">
+    <input name="q" placeholder="Search phrase" value="{{ query }}" required>
+    <input name="min" type="number" placeholder="Min chap" value="{{ minc }}">
+    <input name="max" type="number" placeholder="Max chap" value="{{ maxc }}">
+    <button type="submit">Search</button>
+  </form>
+
+  {% if results %}
+    <h2>Results ({{ results|length }})</h2>
+    {% for chap, excerpt in results %}
+      <div class="result">
+        <span class="chap">Chapter {{ chap }}:</span>
+        <span class="excerpt">{{ excerpt|safe }}</span>
+      </div>
+    {% endfor %}
+  {% endif %}
+</body>
+</html>
